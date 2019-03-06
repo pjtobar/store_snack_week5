@@ -17,3 +17,20 @@ user2 = User.create(username: 'Bruce',
 								    password: 'password1234',
 								    password_confirmation: 'password1234')
 user2.add_role(:client)
+
+cat1 = Category.create(name: 'Candy')
+cat2 = Category.create(name: 'Cookies')
+
+pro1 = Product.create(name: 'Dorito',
+ 											price: 12.50,
+											stock: 5,
+											sku: '012-0-kdg',
+											category: cat1
+										)
+
+pro2 = Product.create(name: 'Chonky',
+ 											price: 0.35,
+											stock: 15,
+											sku: '013-0-sss',
+											category: cat2
+										)

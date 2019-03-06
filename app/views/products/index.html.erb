@@ -1,0 +1,25 @@
+<h2 align='center'>Welcome to store</h2>
+<table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">SKU</th>
+      <th scope="col">Name</th>
+      <th scope="col">Category</th>
+      <th scope="col">Price</th>
+      <th scope="col">Stock</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @product.each_with_index do |pro, index|%>
+    <tr>
+      <th scope="row"> <%= index+1%> </th>
+      <td> <%= pro.sku%> </td>
+      <td> <%= pro.name%> </td>
+      <td> <%= pro.category.name%> </td>
+      <td> <%= pro.price%> </td>
+      <td> <%= pro.stock%> </td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
