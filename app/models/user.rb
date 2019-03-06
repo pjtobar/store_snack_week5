@@ -1,5 +1,8 @@
 class User < ApplicationRecord
   rolify
+  has_many :purchase
+  has_many :like
+  has_many :product, :through => :like
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -11,6 +14,6 @@ class User < ApplicationRecord
 
   def client?
     has_role?(:client)
-  end 
+  end
 
 end
