@@ -7,10 +7,10 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 Role.create(name: :admin)
 Role.create(name: :client)
-user1 = User.create(username: 'Nicole',
-								    email: 'admin@gmail.com',
-								    password: 'password1234',
-								    password_confirmation: 'password1234')
+user1 = User.create(username: 'pabloth',
+								    email: 'pablo.tobar711@gmail.com',
+								    password: 'pabloth',
+								    password_confirmation: 'pabloth')
 user1.add_role(:admin)
 user2 = User.create(username: 'Bruce',
 								    email: 'client@gmail.com',
@@ -18,19 +18,15 @@ user2 = User.create(username: 'Bruce',
 								    password_confirmation: 'password1234')
 user2.add_role(:client)
 
-cat1 = Category.create(name: 'Candy')
-cat2 = Category.create(name: 'Cookies')
+cat = []
+20.times do
+	cat << Category.create(name: Faker::Dessert.topping)
+end
 
-pro1 = Product.create(name: 'Dorito',
- 											price: 12.50,
-											stock: 5,
-											sku: '012-0-kdg',
-											category: cat1
-										)
-
-pro2 = Product.create(name: 'Chonky',
- 											price: 0.35,
-											stock: 15,
-											sku: '013-0-sss',
-											category: cat2
-										)
+70.times do
+	Product.create(name: Faker::Music::RockBand.name,
+								 price: rand(1.00..20.00).round(2),
+								 stock: rand(0..50),
+								 sku: Faker::Number.hexadecimal,
+								 category: cat.sample)
+end
