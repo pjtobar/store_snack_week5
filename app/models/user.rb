@@ -1,8 +1,8 @@
 class User < ApplicationRecord
   rolify
-  has_many :purchase
-  has_many :like
-  has_many :product, :through => :like
+  has_many :purchases
+  has_many :likes
+  has_many :products, :through => :likes
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,

@@ -8,6 +8,7 @@
       <th scope="col">Category</th>
       <th scope="col">Price</th>
       <th scope="col">Stock</th>
+      <th scope="col">Buy</th>
     </tr>
   </thead>
   <tbody>
@@ -19,6 +20,7 @@
       <td> <%= pro.category.name%> </td>
       <td> <%= pro.price%> </td>
       <td> <%= pro.stock%> </td>
+      <td><%= link_to "Buy Product", product_path(pro), class: "btn btn-info" %></td>
     </tr>
     <% end %>
   </tbody>

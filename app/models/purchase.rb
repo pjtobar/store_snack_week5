@@ -1,5 +1,5 @@
 class Purchase < ApplicationRecord
-  belongs_to :User
-  has_many :datail
-  has_many :product, :through => :detail
+  belongs_to :user
+  has_many :details
+  has_many :products, :through => :details
 end

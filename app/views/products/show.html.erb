@@ -1,0 +1,11 @@
+<div class="container">
+  <label for=""> <%= @product.name%> </label>
+</div>
+
+<%= form_for(Detail.new) do |f| %>
+    <%= label_tag :quantity %>
+    <%= f.number_field :quantity%>
+    <%= f.hidden_field :product_id, value: @product.id %>
+    <%= f.hidden_field :purchase_id, value: @purchase.id %>
+    <%= f.submit "Add Cart" %>
+<% end %>
