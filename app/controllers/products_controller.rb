@@ -7,12 +7,10 @@ class ProductsController < ApplicationController
   end
 
   def show
+    # @all_product = Product.all
     @product = Product.find(params[:id])
-    @purchase = Purchase.where(["user_id = ? and state = ?", current_user.id, 1]).first
-    if (!@purchase)
-      @purchase = Purchase.create(user_id: current_user.id, state: 1)
-      @purchase.save
-    end
+    # @purchase = Purchase.where(["user_id = ? and state = ?", current_user.id, 1]).first
+    
   end
 
   def update

@@ -1,11 +1,17 @@
 <div class="container">
-  <label for=""> <%= @product.name%> </label>
+  <h1>Product Detail</h1>
+  <label>Name:</label>
+  <label> <%= @product.name%> </label></br>
+  <label>Category:</label>
+  <label> <%= @product.category.name%> </label></br>
+  <label>Quantity Available:</label>
+  <label> <%= @product.stock%> </label>
+  <h3>Price:</h3>
+  <h3>$<%=@product.price%></h3>
+  <%= form_for(Detail.new) do |f| %>
+      <%= label_tag :quantity %>
+      <%= f.select :quantity, (1..@product.stock) %>
+      <%= f.hidden_field :product_id, value: @product.id %>
+      <%= f.submit "Add Cart" %>
+  <% end %>
 </div>
-
-<%= form_for(Detail.new) do |f| %>
-    <%= label_tag :quantity %>
-    <%= f.number_field :quantity%>
-    <%= f.hidden_field :product_id, value: @product.id %>
-    <%= f.hidden_field :purchase_id, value: @purchase.id %>
-    <%= f.submit "Add Cart" %>
-<% end %>
