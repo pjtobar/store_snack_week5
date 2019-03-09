@@ -7,13 +7,22 @@ class DetailsController < ApplicationController
       @purchase.save
     end
 
-    @detail = Detail.new
-    @detail.quantity = params[:detail][:quantity]
-    @detail.product_id = params[:detail][:product_id]
-    @detail.purchase_id = @purchase.id
-    @detail.save
+    @detail = current_user.purchases.find_by(state: 1).details.find_by(product_id: params[:detail][:product_id])
 
-    redirect_to products_path
+    if @detail
+      @detail.quantity += params[:detail][:quantity].to_i
+      @detail.save
+    else
+      @detail = Detail.new(detail_params)
+      @detail.purchase_id = @purchase.id
+      @detail.save
+    end
+
+    @product = Product.find(params[:detail][:product_id])
+    @product.stock = @product.stock - params[:detail][:quantity].to_i
+    @product.save
+
+    redirect_to products_path and return
   end
 
   def show
@@ -24,17 +33,15 @@ class DetailsController < ApplicationController
   end
 
   def pay
-    details = Detail.where(purchase_id: params[:id])
-    details.each do |d|
-      puts d.product_id
-      product = Product.where(id: d.product_id).first
-      puts product.stock
-      product.stock = product.stock + d.quantity
-      product.save
-    end
     purchase = Purchase.find(params[:id])
     purchase.state = 0
     purchase.save
-    redirect_to products_path
+    redirect_to products_path and return
+  end
+
+  private
+
+  def detail_params
+    params.require(:detail).permit(:product_id, :quantity)
   end
 end

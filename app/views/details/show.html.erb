@@ -39,14 +39,12 @@
                                 <h4><strong><%= detail.quantity %><span class="text-muted"></span></strong></h4>
                             </div>
                             <div class="col-2 col-sm-2 col-md-2 text-right">
-                                <button type="button" class="btn btn-outline-danger btn-xs">
-                                    <i class="fa fa-trash" aria-hidden="true"></i>
-                                </button>
+                                <h4><strong>$ <%= detail.product.price * detail.quantity %><span class="text-muted"></span></strong></h4>
                             </div>
                         </div>
                     </div>
                     <hr>
-                    <% @total = @total + detail.product.price %>
+                    <% @total = @total + detail.product.price * detail.quantity %>
                     <% end %>
 
                     <!-- END PRODUCT -->
