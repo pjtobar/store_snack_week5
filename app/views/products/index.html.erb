@@ -7,6 +7,15 @@
   </div>
 
   <h2 align='center'>Welcome to store</h2>
+  <div class="container" align = "right">
+    <%= form_for @search, url: products_path, as: :search,  method: :get do |f| %>
+       <%= f.text_field :name %>
+       <%= link_to products_path, class: 'btn btn-warning' do %>
+        Clear
+       <% end %>
+       <%= f.submit "Submit", class: 'btn btn-success' %>
+    <% end %>
+  </div>
   <table class="table">
     <thead class="thead-dark">
       <tr>

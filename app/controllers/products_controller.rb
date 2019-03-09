@@ -3,14 +3,24 @@ class ProductsController < ApplicationController
 
   def index
     # @product = Product.all
-    @pagy, @product = pagy(Product.all, items: 10)
+    @search = OpenStruct.new(
+      params.fetch(:search, {})
+    )
+    @products =
+      if params[:search].present? && params[:search][:name]
+        puts 'ssssssssssssssssssssssssssssssssssssss'
+        Product.where('name LIKE ?', params[:search][:name]).order(created_at: :desc)
+      else
+        Product.all.order(created_at: :desc)
+      end
+    @pagy, @product = pagy(@products, items: 10)
   end
 
   def show
     # @all_product = Product.all
     @product = Product.find(params[:id])
     # @purchase = Purchase.where(["user_id = ? and state = ?", current_user.id, 1]).first
-    
+
   end
 
   def update
