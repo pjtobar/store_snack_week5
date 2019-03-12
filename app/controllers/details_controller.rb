@@ -1,34 +1,37 @@
 class DetailsController < ApplicationController
-  def create
-    @purchase = current_user.purchases.find_by(state: 1)
 
+  before_action :set_purchase, only: %i[create show]
+  # DRY with getting the purchase.
+
+  def create
     if (!@purchase)
       @purchase = Purchase.new(user_id: current_user.id, state: 1)
       @purchase.save
     end
 
-    @detail = current_user.purchases.find_by(state: 1).details.find_by(product_id: params[:detail][:product_id])
+    detail = @purchase.details.find_by(product_id: detail_params[:product_id])
+    # This format was in the documentation of strong params.
 
-    if @detail
-      @detail.quantity += params[:detail][:quantity].to_i
-      @detail.save
+    product = Product.find(detail_params[:product_id])
+    product.stock = product.stock - detail_params[:quantity].to_i
+    product.save
+    # don't use instance variables when a local variable will do. 
+
+    if detail
+      detail.quantity += detail_params[:quantity].to_i
+      detail.save
     else
-      @detail = Detail.new(detail_params)
-      @detail.purchase_id = @purchase.id
-      @detail.save
+      detail = @purchase.details.create(detail_params)
+      # Use association methods instead of assigning and creating variables on your own.
     end
 
-    @product = Product.find(params[:detail][:product_id])
-    @product.stock = @product.stock - params[:detail][:quantity].to_i
-    @product.save
-
-    redirect_to products_path and return
+    redirect_to products_path
   end
 
   def show
-    @purchase = current_user.purchases.find_by(state: 1)
     if(@purchase)
-      @details = Detail.where(purchase_id: @purchase.id)
+      @details = @purchase.details
+      # Use association methods.
     end
   end
 
@@ -38,6 +41,11 @@ class DetailsController < ApplicationController
     purchase.save
     redirect_to products_path and return
   end
+
+  def set_purchase
+    @purchase = current_user.purchases.find_by(state: 1)
+  end
+
 
   private
 

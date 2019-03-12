@@ -7,7 +7,7 @@ class ProductsController < ApplicationController
     )
     @products =
       if params[:search].present? && params[:search][:name]
-        Product.where('name LIKE ?', params[:search][:name]).order(created_at: :desc)
+        Product.where("name LIKE ?", params[:search][:name]).order(created_at: :desc)
       else
         Product.all.order(created_at: :desc)
       end
