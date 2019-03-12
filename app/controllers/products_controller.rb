@@ -2,6 +2,7 @@ class ProductsController < ApplicationController
   include Pagy::Backend
 
   def index
+    @like = Like.new
     @search = OpenStruct.new(
       params.fetch(:search, {})
     )

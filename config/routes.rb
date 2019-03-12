@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   root 'products#index'
   resources :products
   resources :details
+  resources :likes
   post "details/cart" => "details#cart"
   get "details/pay/:id", to: 'details#pay', as: 'pay'
   # get '/products/:id', to: 'products#show', as: 'products'
