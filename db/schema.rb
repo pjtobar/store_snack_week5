@@ -25,9 +25,9 @@ ActiveRecord::Schema.define(version: 2019_03_08_145430) do
     t.bigint "product_id"
     t.bigint "purchase_id"
     t.integer "state"
+    t.integer "quantity"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "quantity"
     t.index ["product_id"], name: "index_details_on_product_id"
     t.index ["purchase_id"], name: "index_details_on_purchase_id"
   end
