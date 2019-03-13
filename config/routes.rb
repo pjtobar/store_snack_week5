@@ -6,6 +6,12 @@ Rails.application.routes.draw do
   resources :likes
   post "details/cart" => "details#cart"
   get "details/pay/:id", to: 'details#pay', as: 'pay'
+
+  namespace :api, defaults: {format: :json} do
+    namespace :v1 do
+      resources :products
+    end
+  end
   # get '/products/:id', to: 'products#show', as: 'products'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
