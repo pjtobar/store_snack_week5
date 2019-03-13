@@ -9,11 +9,13 @@
   <h2 align='center'>Welcome to store</h2>
   <div class="container" align = "center">
     <%= form_for @search, url: products_path, as: :search,  method: :get do |f| %>
+       <%= f.select :sort, [["Name","name ASC"], ["Likes","likes_count ASC"]] %>
+       <%= f.select :category_id, @categories.collect {|p| [ p.name, p.id ] }, { include_blank: true } %>
        <%= f.text_field :name %>
        <%= link_to products_path, class: 'btn btn-warning' do %>
         Clear
        <% end %>
-       <%= f.submit "Submit", class: 'btn btn-success' %>
+       <%= f.submit "Search", class: 'btn btn-success' %>
     <% end %>
   </div>
   <table class="table">
