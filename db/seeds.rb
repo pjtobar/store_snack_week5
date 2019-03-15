@@ -13,10 +13,20 @@ user1 = User.create(username: 'pabloth',
 								    password_confirmation: 'pabloth')
 user1.add_role(:admin)
 user2 = User.create(username: 'Bruce',
-								    email: 'client@gmail.com',
-								    password: 'password1234',
-								    password_confirmation: 'password1234')
+								    email: 'client1@gmail.com',
+								    password: '12346789',
+								    password_confirmation: '12346789')
 user2.add_role(:client)
+user3 = User.create(username: 'Javier',
+								    email: 'client2@gmail.com',
+								    password: '12346789',
+								    password_confirmation: '12346789')
+user3.add_role(:client)
+user4 = User.create(username: 'Javier',
+								    email: 'client3@gmail.com',
+								    password: '12346789',
+								    password_confirmation: '12346789')
+user4.add_role(:client)
 
 cat = []
 20.times do
@@ -28,5 +38,6 @@ end
 								 price: rand(1.00..20.00).round(2),
 								 stock: rand(0..50),
 								 sku: Faker::Number.hexadecimal,
-								 category: cat.sample)
+								 category: cat.sample,
+							 	 state: 1)
 end

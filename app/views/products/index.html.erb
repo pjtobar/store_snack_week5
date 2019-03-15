@@ -2,7 +2,12 @@
 <div class="container">
   <% if user_signed_in? %>
   <div class="container" align = "right">
-    <%= link_to "Cart", detail_path(current_user.id), method: :get, class: "btn btn-info" %>
+    <% if current_user and current_user.has_role? :client %>
+      <%= link_to "Cart", detail_path(current_user.id), method: :get, class: "btn btn-info" %>
+    <% end %>
+    <% if current_user and current_user.has_role? :admin %>
+      <%= link_to "New Product", new_product_path, class: "btn btn-info" %>
+    <% end %>
   <%end%>
   </div>
 
@@ -28,9 +33,14 @@
         <th scope="col">Price</th>
         <th scope="col">Stock</th>
         <% if user_signed_in? %>
-          <th scope="col">Buy</th>
+          <th scope="col">Show</th>
+        <% if current_user and current_user.has_role? :client %>
           <th scope="col">Like</th>
           <th scope="col">Num Likes</th>
+        <% end %>
+          <% if current_user and current_user.has_role? :admin %>
+            <th>Options</th>
+          <% end %>
         <%end%>
       </tr>
     </thead>
@@ -44,14 +54,22 @@
         <td> <%= pro.price%> </td>
         <td> <%= pro.stock%> </td>
         <% if user_signed_in? %>
-          <td><%= link_to "Show Product", product_path(pro.id), class: "btn btn-info" %></td>
-          <td>
-            <%= form_with model: @like, method: "post" do |f| %>
-              <%= f.hidden_field :product_id, value: pro.id %>
-              <%= f.submit "LIKE", class: "btn btn-info" %>
-            <% end %>
-          </td>
-          <td><%= pro.likes.size %></td>
+          <td><%= link_to "Show Product", product_path(pro.id), class: "btn btn-success" %></td>
+          <% if current_user and current_user.has_role? :client %>
+            <td>
+              <%= form_with model: @like, method: "post" do |f| %>
+                <%= f.hidden_field :product_id, value: pro.id %>
+                <%= f.submit "LIKE", class: "btn btn-info" %>
+              <% end %>
+            </td>
+            <td><%= pro.likes.size %></td>
+          <% end %>
+          <% if current_user and current_user.has_role? :admin %>
+            <td>
+              <%= link_to 'edit', edit_product_path(pro.id), class: "btn btn-info" %>
+              <%= link_to 'Delete', product_path(pro), method: :delete, class: "btn btn-warning", data: {confirm: "Are you sure?"} %>
+            </td>
+          <% end %>
         <%end%>
 
       </tr>
