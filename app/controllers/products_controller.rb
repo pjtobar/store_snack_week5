@@ -1,5 +1,7 @@
 class ProductsController < ApplicationController
   include Pagy::Backend
+  # before_action :product, except: [:index]
+  # helper_method :product
 
   def index
     @like = Like.new
@@ -9,10 +11,9 @@ class ProductsController < ApplicationController
     )
     @products =
       if params[:search].present?
-        Product.available.where("name ILIKE ?", params[:search][:name]).order(params[:search][:sort])
+        Product.available.where("name ILIKE ?", "%#{params[:search][:name]}%")
       else
         Product.available.all.order(name: :ASC)
-        # Product.where("name LIKE ?", params[:search][:name]).order(name: :asc)
       end
     @pagy, @product = pagy(@products, items: 10)
   end
@@ -23,7 +24,7 @@ class ProductsController < ApplicationController
 
 
   def new
-    if current_user.has_role? :admin
+    if user_signed_in? && (current_user.has_role? :admin)
       @product = Product.new
       @categories = Category.all.order(name: :ASC)
     else
@@ -32,15 +33,16 @@ class ProductsController < ApplicationController
   end
 
   def create
-    if current_user.has_role? :admin
+    if user_signed_in? && (current_user.has_role? :admin)
       product = Product.new(product_params)
+      product.state = 1
       product.save
     end
     redirect_to products_path
   end
 
   def edit
-    if current_user.has_role? :admin
+    if user_signed_in? && (current_user.has_role? :admin)
       @product = Product.find(params[:id])
       @categories = Category.all.order(name: :ASC)
     else
@@ -49,7 +51,7 @@ class ProductsController < ApplicationController
   end
 
   def update
-    if current_user.has_role? :admin
+    if user_signed_in? && (current_user.has_role? :admin)
       @product = Product.find(params[:id])
       @product.assign_attributes(product_params)
       if @product.save
@@ -63,7 +65,7 @@ class ProductsController < ApplicationController
   end
 
   def destroy
-    if current_user.has_role? :admin
+    if user_signed_in? && (current_user.has_role? :admin)
       @product = Product.find(params[:id])
       @product.state = 0
       @product.save
@@ -76,5 +78,14 @@ class ProductsController < ApplicationController
   def product_params
     params.require(:product).permit(:name, :price, :stock, :sku, :category_id, :image)
   end
+
+  # def product
+  #   @product ||=
+  #     if ['create', 'new'].include?(action_name)
+  #       Product.new(product_params)
+  #     else
+  #       Product.where(id: params[:id]).first
+  #     end
+  # end
 
 end
