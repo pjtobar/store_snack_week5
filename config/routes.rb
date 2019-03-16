@@ -10,11 +10,8 @@ Rails.application.routes.draw do
   namespace :api, defaults: {format: :json} do
     namespace :v1 do
       resources :products
-<<<<<<< HEAD
       resources :sessions
       resources :users
-=======
->>>>>>> ddce4836d5c743255baa849a8ae36b96e8dcfe5a
     end
   end
   # get '/products/:id', to: 'products#show', as: 'products'

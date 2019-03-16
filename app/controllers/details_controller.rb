@@ -1,10 +1,7 @@
 class DetailsController < ApplicationController
 
   before_action :set_purchase, only: %i[create show]
-<<<<<<< HEAD
   # before_action :user, only: %i[create show]
-=======
->>>>>>> ddce4836d5c743255baa849a8ae36b96e8dcfe5a
 
   def create
     if user_signed_in? &&
@@ -14,7 +11,6 @@ class DetailsController < ApplicationController
           @purchase.save
         end
 
-<<<<<<< HEAD
         detail = @purchase.details.find_by(product_id: detail_params[:product_id])
 
         product = Product.find(detail_params[:product_id])
@@ -24,20 +20,6 @@ class DetailsController < ApplicationController
         if !product.likes.empty? && product.stock <= 3
           SendNotificationsJob.perform_later(product)
         end
-=======
-    detail = @purchase.details.find_by(product_id: detail_params[:product_id])
-
-    product = Product.find(detail_params[:product_id])
-    product.stock = product.stock - detail_params[:quantity].to_i
-    product.save
-
-    if detail
-      detail.quantity += detail_params[:quantity].to_i
-      detail.save
-    else
-      detail = @purchase.details.create(detail_params)
-    end
->>>>>>> ddce4836d5c743255baa849a8ae36b96e8dcfe5a
 
         if detail
           detail.quantity += detail_params[:quantity].to_i
@@ -51,17 +33,12 @@ class DetailsController < ApplicationController
   end
 
   def show
-<<<<<<< HEAD
     if user_signed_in? && (current_user.has_role? :client)
       if(@purchase)
         @details = @purchase.details
       end
     else
       redirect_to products_path
-=======
-    if(@purchase)
-      @details = @purchase.details
->>>>>>> ddce4836d5c743255baa849a8ae36b96e8dcfe5a
     end
   end
 

@@ -11,16 +11,9 @@ class ProductsController < ApplicationController
     )
     @products =
       if params[:search].present?
-<<<<<<< HEAD
         Product.available.where("name ILIKE ?", "%#{params[:search][:name]}%")
       else
         Product.available.all.order(name: :ASC)
-=======
-        Product.where("name LIKE ?", params[:search][:name]).order(params[:search][:sort])
-      else
-        Product.all.order(name: :ASC)
-        # Product.where("name LIKE ?", params[:search][:name]).order(name: :asc)
->>>>>>> ddce4836d5c743255baa849a8ae36b96e8dcfe5a
       end
     @pagy, @product = pagy(@products, items: 10)
   end
