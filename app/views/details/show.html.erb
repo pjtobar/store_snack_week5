@@ -20,31 +20,31 @@
                     <% @details.each do |detail|%>
                     <div class="row">
                         <div class="col-12 text-sm-center col-sm-12 text-md-left col-md-2">
-                            <h4 class="product-name">SKU:   <strong><%= detail.product.sku %></strong></h4>
+                            <h4 class="product-name">SKU:   <strong><%= detail.product_sku %></strong></h4>
                             <h4>
                                 <small></small>
                             </h4>
                         </div>
                         <div class="col-12 text-sm-center col-sm-12 text-md-left col-md-4">
-                            <h4 class="product-name"><strong><%= detail.product.name %></strong></h4>
+                            <h4 class="product-name"><strong><%= detail.product_name %></strong></h4>
                             <h4>
                                 <small><%= detail.product.category_name %></small>
                             </h4>
                         </div>
                         <div class="col-12 col-sm-12 text-sm-center col-md-6 text-md-right row">
                             <div class="col-3 col-sm-3 col-md-5 text-md-right" style="padding-top: 5px">
-                                <h4><strong><%= detail.product.price %><span class="text-muted"> x</span></strong></h4>
+                                <h4><strong><%= detail.product_price %><span class="text-muted"> x</span></strong></h4>
                             </div>
                             <div class="col-3 col-sm-3 col-md-5 text-md-right" style="padding-top: 5px">
                                 <h4><strong><%= detail.quantity %><span class="text-muted"></span></strong></h4>
                             </div>
                             <div class="col-2 col-sm-2 col-md-2 text-right">
-                                <h4><strong>$ <%= detail.product.price * detail.quantity %><span class="text-muted"></span></strong></h4>
+                                <h4><strong>$ <%= detail.product_price * detail.quantity %><span class="text-muted"></span></strong></h4>
                             </div>
                         </div>
                     </div>
                     <hr>
-                    <% @total = @total + detail.product.price * detail.quantity %>
+                    <% @total = @total + detail.product_price * detail.quantity %>
                     <% end %>
 
                     <!-- END PRODUCT -->
