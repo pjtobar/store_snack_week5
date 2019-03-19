@@ -11,7 +11,7 @@ class ProductsController < ApplicationController
     )
     @products =
       if params[:search].present?
-        Product.available.where("name ILIKE ?", "%#{params[:search][:name]}%")
+        Product.available.where('name ILIKE ?', "%#{params[:search][:name]}%")
       else
         Product.available.all.order(name: :ASC)
       end
@@ -22,9 +22,8 @@ class ProductsController < ApplicationController
     @product = Product.find(params[:id])
   end
 
-
   def new
-      if user_signed_in? && (current_user.has_role? :admin)
+    if user_signed_in? && (current_user.has_role? :admin)
       @product = Product.new
       @categories = Category.all.order(name: :ASC)
     else

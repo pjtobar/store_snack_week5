@@ -13,4 +13,8 @@ class Product < ApplicationRecord
   def product_image
     return self.image.variant(resize: '220x220').processed
   end
+
+  def category_name
+    category.name
+  end
 end
