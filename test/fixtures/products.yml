@@ -4,12 +4,14 @@ one:
   name: MyString
   price: 9.99
   stock: 1
-  sku: MyString
+  sku: abcd123
   category: one
+  state: 1
 
 two:
   name: MyString
   price: 9.99
   stock: 1
-  sku: MyString
+  sku: dfgh123
   category: two
+  state: 1

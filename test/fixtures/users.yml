@@ -8,8 +8,10 @@ one:
   email: example1@gmail.com
   encrypted_password: $2a$11$SrsjTJMVbDrd5.q5VONIIeNn384xQ1MQpYhzBsFM.WEK93B/P4wL. #12346789
   username: usernamefake1
+  roles: one
 
 two:
   email: example2@gmail.com
   encrypted_password: $2a$11$SrsjTJMVbDrd5.q5VONIIeNn384xQ1MQpYhzBsFM.WEK93B/P4wL. #12346789
   username: usernamefake2
+  roles: two

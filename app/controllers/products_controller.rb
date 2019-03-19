@@ -24,7 +24,7 @@ class ProductsController < ApplicationController
 
 
   def new
-    if user_signed_in? && (current_user.has_role? :admin)
+      if user_signed_in? && (current_user.has_role? :admin)
       @product = Product.new
       @categories = Category.all.order(name: :ASC)
     else
@@ -69,7 +69,7 @@ class ProductsController < ApplicationController
       @product = Product.find(params[:id])
       @product.state = 0
       @product.save
-    end
+      end
     redirect_to products_path and return
   end
 
