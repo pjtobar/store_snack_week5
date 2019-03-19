@@ -4,14 +4,12 @@ class DetailsController < ApplicationController
   # before_action :user, only: %i[create show]
 
   def create
-    if user_signed_in? &&
+    if user_signed_in?
       if (current_user.has_role? :client)
         if (!@purchase)
           @purchase = Purchase.new(user_id: current_user.id, state: 1)
           @purchase.save
         end
-
-        detail = @purchase.details.find_by(product_id: detail_params[:product_id])
 
         product = Product.find(detail_params[:product_id])
         product.stock = product.stock - detail_params[:quantity].to_i
@@ -20,6 +18,8 @@ class DetailsController < ApplicationController
         if !product.likes.empty? && product.stock <= 3
           SendNotificationsJob.perform_later(product)
         end
+
+        detail = @purchase.details.find_by(product_id: detail_params[:product_id])
 
         if detail
           detail.quantity += detail_params[:quantity].to_i
