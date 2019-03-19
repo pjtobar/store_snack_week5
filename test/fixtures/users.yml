@@ -5,13 +5,13 @@
 # below each fixture, per the syntax in the comments below
 #
 one:
-  email: example1@gmail.com
-  encrypted_password: $2a$11$SrsjTJMVbDrd5.q5VONIIeNn384xQ1MQpYhzBsFM.WEK93B/P4wL. #12346789
+  email: pablo.tobar711@gmail.com
+  encrypted_password: <%= User.new.send(:password_digest, 'pabloth') %>
   username: usernamefake1
   roles: one
 
 two:
   email: example2@gmail.com
-  encrypted_password: $2a$11$SrsjTJMVbDrd5.q5VONIIeNn384xQ1MQpYhzBsFM.WEK93B/P4wL. #12346789
+  encrypted_password: <%= User.new.send(:password_digest, '12346789') %>
   username: usernamefake2
   roles: two

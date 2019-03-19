@@ -9,7 +9,7 @@ module API
 
         if @user&.valid_password?(params[:password])
           token = JWT.encode(
-            {user_id: @user.id, exp: (Time.now + 2.weeks).to_i},
+            {user_id: @user.id, exp: (Time.now + 2.seconds).to_i},
             SECRET_KEY,'HS256'
           )
           render json: {status: 'SUCCESS', message: 'Valid User', token: token}, status: :ok
@@ -17,11 +17,6 @@ module API
         else
           render json: {status: 'INVALID', message: 'Invalid User'}, status: :unauthorized
         end
-      end
-
-      # user controller
-      def index
-
       end
     end
   end
