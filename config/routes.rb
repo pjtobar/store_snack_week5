@@ -1,11 +1,11 @@
 Rails.application.routes.draw do
+  root 'products#index'
   get 'comments/index'
   get 'comments/new'
   devise_for :users
   resources :users do
     resources :comments
   end
-  root 'products#index'
   resources :products do
     resources :comments
   end

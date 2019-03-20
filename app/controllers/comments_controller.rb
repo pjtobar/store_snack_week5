@@ -10,11 +10,15 @@ class CommentsController < ApplicationController
   end
 
   def create
-    @comment = @commentable.comments.new(allowed_params)
-    if @comment.save
-      redirect_to @commentable, notice: 'Comment created'
+    if @commentable.class == Product
+      @comment = @commentable.comments.new(allowed_params_product)
     else
-      render :new
+      @comment = @commentable.comments.new(allowed_params_user)
+    end
+    if @comment.save
+      redirect_to @commentable
+    else
+      redirect_to products_path
     end
   end
 
@@ -26,7 +30,11 @@ class CommentsController < ApplicationController
     # puts "aaaaaaaaaaaaaaaaaaaaaaaaaaaa#{@commentable.class}"
   end
 
-  def allowed_params
+  def allowed_params_product
     params.require(:comment).permit(:review).merge(user_id: current_user.id, state: 1)
+  end
+
+  def allowed_params_user
+    params.require(:comment).permit(:review).merge(user_id: current_user.id, state: 0)
   end
 end
