@@ -9,6 +9,8 @@ class Product < ApplicationRecord
   validates :sku, uniqueness: true
 
   scope :available, -> { where(state: 1) }
+  scope :name_like, ->(product_name) { where('name ILIKE ?', "%#{product_name}%") }
+  scope :order_by_name, -> { order(name: :ASC) }
 
   delegate :name, to: :category, prefix: true
 

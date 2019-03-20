@@ -7,9 +7,9 @@ module API
       def index
         products =
           if params[:search].present? && params[:search][:name]
-            Product.where("name LIKE ?", params[:search][:name]).order('name ASC')
+            Product.name_like(params[:search][:name]).order_by_name
           else
-            Product.all.order('name ASC')
+            Product.all.order_by_name
           end
         product = pagy(products, items: 10)
         render json: {status: 'SUCCESS', message: 'Loaded products', data: product},status: :ok
