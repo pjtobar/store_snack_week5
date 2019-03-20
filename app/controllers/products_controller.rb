@@ -17,7 +17,11 @@ class ProductsController < ApplicationController
     @pagy, @product = pagy(@products, items: 10)
   end
 
-  def show; end
+  def show
+    @commentable = @product
+    @comments = @commentable.comments
+    @comment = Comment.new
+  end
 
   def new
     @product = Product.new

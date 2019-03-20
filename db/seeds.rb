@@ -22,11 +22,41 @@ user3 = User.create(username: 'Javier',
 								    password: '12346789',
 								    password_confirmation: '12346789')
 user3.add_role(:client)
-user4 = User.create(username: 'Javier',
+user4 = User.create(username: 'Aracely',
 								    email: 'client3@gmail.com',
 								    password: '12346789',
 								    password_confirmation: '12346789')
 user4.add_role(:client)
+user5 = User.create(username: 'Diego',
+								    email: 'client4@gmail.com',
+								    password: '12346789',
+								    password_confirmation: '12346789')
+user5.add_role(:client)
+user6 = User.create(username: 'Rodrigo',
+								    email: 'client5@gmail.com',
+								    password: '12346789',
+								    password_confirmation: '12346789')
+user6.add_role(:client)
+user7 = User.create(username: 'Eve',
+								    email: 'client6@gmail.com',
+								    password: '12346789',
+								    password_confirmation: '12346789')
+user7.add_role(:client)
+user8 = User.create(username: 'Gabriel',
+								    email: 'client7@gmail.com',
+								    password: '12346789',
+								    password_confirmation: '12346789')
+user8.add_role(:client)
+user9 = User.create(username: 'Karla',
+								    email: 'client8@gmail.com',
+								    password: '12346789',
+								    password_confirmation: '12346789')
+user9.add_role(:client)
+user10 = User.create(username: 'Daniel',
+								    email: 'client9@gmail.com',
+								    password: '12346789',
+								    password_confirmation: '12346789')
+user10.add_role(:client)
 
 cat = []
 20.times do

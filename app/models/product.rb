@@ -4,9 +4,11 @@ class Product < ApplicationRecord
   has_many :purchases, through: :details
   has_many :likes
   has_many :users, through: :likes
+  has_many :comments, as: :commentable
   has_and_belongs_to_many :tags
   has_one_attached :image
   validates :sku, uniqueness: true
+
 
   scope :available, -> { where(state: 1) }
   scope :name_like, ->(product_name) { where('name ILIKE ?', "%#{product_name}%") }

@@ -1,10 +1,16 @@
 Rails.application.routes.draw do
+  get 'comments/index'
+  get 'comments/new'
   devise_for :users
+  resources :users do
+    resources :comments
+  end
   root 'products#index'
-  resources :products
+  resources :products do
+    resources :comments
+  end
   resources :details
   resources :likes
-  post "details/cart" => "details#cart"
   get "details/pay/:id", to: 'details#pay', as: 'pay'
 
   namespace :api, defaults: {format: :json} do
