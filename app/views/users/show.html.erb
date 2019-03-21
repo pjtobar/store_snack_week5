@@ -8,11 +8,14 @@
   </div>
 </div>
 
-<div class="panel panel-default col-md-6">
-  <div class="panel-body">
-    <h3>Comments</h3>
-    <%= render "comments/comments" %>
-    <h3>Add Comment</h3>
-    <%= render "comments/form" %>
+
+  <div class="panel panel-default col-md-6">
+    <div class="panel-body">
+      <h3>Comments</h3>
+      <%= render "comments/comments" %>
+<% if current_user and current_user.has_role? :client %>
+      <h3>Add Comment</h3>
+      <%= render "comments/form" %>
+    </div>
   </div>
-</div>
+<% end %>

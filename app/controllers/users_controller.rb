@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_comment, only: %i[approve refuse]
-  before_action :check_login
+  before_action :check_login, only: %i[pending_approval approve refuse]
 
   def index
     @users = User.with_role :client
