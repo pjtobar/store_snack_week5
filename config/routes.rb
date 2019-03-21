@@ -5,6 +5,11 @@ Rails.application.routes.draw do
   devise_for :users
   resources :users do
     resources :comments
+    collection do
+      get :pending_approval
+      get '/approve/:id', to: 'users#approve', as: 'approve'
+      get '/refuse/:id', to: 'users#refuse', as: 'refuse'
+    end
   end
   resources :products do
     resources :comments

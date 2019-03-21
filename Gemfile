@@ -32,6 +32,7 @@ gem 'pagy'
 gem 'jwt'
 gem 'image_processing'
 gem 'sidekiq'
+gem 'dotenv-rails', '~> 2.7', '>= 2.7.1'
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'
 # Use ActiveModel has_secure_password

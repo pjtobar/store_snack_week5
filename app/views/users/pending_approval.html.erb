@@ -1,0 +1,25 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">User Profile</th>
+      <th scope="col">User Review</th>
+      <th scope="col">Review</th>
+      <th scope="col">Date</th>
+      <th scope="col">Options</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @review_pending.each do |re|%>
+      <tr>
+        <td><%= re.user.username %></td>
+        <td><%= re.commentable.username %></td>
+        <td><%= re.review %></td>
+        <td><%= re.created_at %></td>
+        <td>
+          <%= link_to "Approve", approve_users_path(re.id), class: "btn btn-success" %>
+          <%= link_to "Refuse", refuse_users_path(re.id), class: "btn btn-warning" %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

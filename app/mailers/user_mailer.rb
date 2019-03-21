@@ -4,6 +4,6 @@ class UserMailer < ApplicationMailer
     @product = product
     @user = @product.likes.order(:created_at).last.user
     attachments['product.jpg'] = File.read(ActiveStorage::Blob.service.send(:path_for, product.image.key)) if product.image.attached?
-    mail(to: @user.email, subject: 'Simple Demo to showcase Active Job')
+    mail(to: @user.email, subject: 'Snack Store')
   end
 end
