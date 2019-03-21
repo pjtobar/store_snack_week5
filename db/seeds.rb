@@ -8,12 +8,12 @@
 Role.create(name: :admin)
 Role.create(name: :client)
 user1 = User.create(username: 'pabloth',
-								    email: 'pablo.tobar711@gmail.com',
+								    email: 'pablo.admin@gmail.com',
 								    password: 'pabloth',
 								    password_confirmation: 'pabloth')
 user1.add_role(:admin)
 user2 = User.create(username: 'Bruce',
-								    email: 'client1@gmail.com',
+								    email: 'pablo.tobar711@gmail.com',
 								    password: '12346789',
 								    password_confirmation: '12346789')
 user2.add_role(:client)
