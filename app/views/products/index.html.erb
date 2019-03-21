@@ -7,6 +7,7 @@
     <% end %>
     <% if current_user and current_user.has_role? :admin %>
       <%= link_to "New Product", new_product_path, class: "btn btn-info" %>
+      <%= link_to "Check Comments", pending_approval_users_path, class: "btn btn-info" %>
     <% end %>
   <%end%>
   </div>

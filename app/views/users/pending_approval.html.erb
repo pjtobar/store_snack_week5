@@ -11,13 +11,17 @@
   <tbody>
     <% @review_pending.each do |re|%>
       <tr>
-        <td><%= re.user.username %></td>
         <td><%= re.commentable.username %></td>
+        <td><%= re.user.username %></td>
         <td><%= re.review %></td>
-        <td><%= re.created_at %></td>
+        <td><%= re.created_at.getlocal.strftime("%m/%d/%Y %I:%M %p") %></td>
         <td>
-          <%= link_to "Approve", approve_users_path(re.id), class: "btn btn-success" %>
-          <%= link_to "Refuse", refuse_users_path(re.id), class: "btn btn-warning" %>
+          <%= link_to "View Profile", user_path(re.commentable_id), class: "btn btn-info" %>
+          <% if re.state == 0%>
+            <%= link_to "Show", approve_users_path(re.id), class: "btn btn-success" %>
+          <% else %>
+            <%= link_to "Hide", refuse_users_path(re.id), class: "btn btn-warning" %>
+          <% end %>
         </td>
       </tr>
     <% end %>

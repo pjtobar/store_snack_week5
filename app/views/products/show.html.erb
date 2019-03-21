@@ -1,28 +1,35 @@
-<div class="container">
-  <h1>Product Detail</h1>
-  <% if @product.image.attached? %>
-    <%= image_tag @product.product_image %> </label></br></br>
-  <% end %>
-  <label>Name:</label>
-  <label> <%= @product.name%> </label></br>
-  <label>Category:</label>
-  <label> <%= @product.category_name%> </label></br>
-  <label>Quantity Available:</label>
-  <label> <%= @product.stock%> </label>
-  <h3>Price:</h3>
-  <h3>$<%=@product.price%></h3>
-  <% if current_user and current_user.has_role? :client %>
-    <%= form_for(Detail.new) do |f| %>
-        <%= label_tag :quantity %>
-        <%= f.select :quantity, (1..@product.stock) %>
-        <%= f.hidden_field :product_id, value: @product.id %>
-        <%= f.submit "Add Cart" %>
+<div class="panel panel-default col-md-6" align = "center">
+  <div class="panel-body">
+    <h1>Product Detail</h1>
+    <% if @product.image.attached? %>
+      <%= image_tag @product.product_image %> </label></br></br>
     <% end %>
-  <% end %>
-
-  <h2>Comments</h2>
-
-  <%= render "comments/comments" %>
-  <%= render "comments/form" %>
-
+    <label>Name:</label>
+    <label> <%= @product.name%> </label></br>
+    <label>Category:</label>
+    <label> <%= @product.category_name%> </label></br>
+    <label>Quantity Available:</label>
+    <label> <%= @product.stock%> </label>
+    <h3>Price:</h3>
+    <h3>$<%=@product.price%></h3>
+    <% if current_user and current_user.has_role? :client %>
+      <%= form_for(Detail.new) do |f| %>
+          <%= label_tag :quantity %>
+          <%= f.select :quantity, (1..@product.stock) %>
+          <%= f.hidden_field :product_id, value: @product.id %>
+          <%= f.submit "Add Cart" %>
+      <% end %>
+    <% end %>
+  </div>
 </div>
+<% if current_user and current_user.has_role? :client %>
+    <div class="panel panel-default col-md-6">
+      <div class="panel-body">
+        <h3>Comments</h3>
+
+        <%= render "comments/comments" %>
+        <h3>Add Comment</h3>
+        <%= render "comments/form" %>
+      </div>
+    </div>
+<% end %>
