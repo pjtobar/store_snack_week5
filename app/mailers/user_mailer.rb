@@ -3,7 +3,7 @@ class UserMailer < ApplicationMailer
   def send_notification_mail(product)
     @product = product
     @user = @product.likes.order(:created_at).last.user
-    attachments['product.jpg'] = File.read(ActiveStorage::Blob.service.send(:path_for, product.image.key)) if product.image.attached?
+    attachments['product.jpg'] = { mime_type: 'image/jpeg', content: product.image.download } if product.image.attached?
     mail(to: @user.email, subject: 'Snack Store')
   end
 end
