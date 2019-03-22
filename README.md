@@ -74,3 +74,7 @@ password: 12346789
 - Only user can show product, give Like to product, buy a product, add to Cart
 - When the stock of a product reaches 3, notify the last user that liked it with an email
 - Add images to products
+
+**HEROKU**
+
+https://snack-store-pj.herokuapp.com

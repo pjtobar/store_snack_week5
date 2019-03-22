@@ -3,7 +3,6 @@
     <tr>
       <th scope="col">User Name</th>
       <th scope="col">Email</th>
-      <th scope="col">Average</th>
       <th scope="col">View Profile</th>
     </tr>
   </thead>
@@ -13,7 +12,6 @@
         <tr>
           <td><%= u.username %></td>
           <td><%= u.email %></td>
-          <td>coming soon</td>
           <td><%= link_to "View Profile", user_path(u.id), class: "btn btn-success" %></td>
         </tr>
       <% end %>
