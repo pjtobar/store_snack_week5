@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   before_action :set_comment, only: %i[approve refuse]
-  before_action :check_login, only: %i[pending_approval approve refuse]
+  before_action :check_login_admin, only: %i[pending_approval approve refuse]
+  before_action :check_login, only: %i[index show]
 
   def index
     @users = User.with_role :client
@@ -8,7 +9,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    redirect_to products_path if @user.has_role? :admin
+    redirect_to users_path if @user.has_role? :admin
     @commentable = @user
     @comments = @commentable.comments.approve
     @comment = Comment.new
@@ -35,8 +36,14 @@ class UsersController < ApplicationController
     redirect_to pending_approval_users_path
   end
 
-  def check_login
+  def check_login_admin
     unless user_signed_in? && (current_user.has_role? :admin)
+      redirect_to products_path and return
+    end
+  end
+
+  def check_login
+    unless user_signed_in?
       redirect_to products_path and return
     end
   end
