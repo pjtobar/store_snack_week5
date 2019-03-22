@@ -6,7 +6,7 @@
     <label>Email:</label>
     <label> <%= @user.email %> </label></br>
     <label>Average Feedback:</label>
-    <label> <%= @user.comments.where(state: 1).average(:score).round(2) %> </label></br></br>
+    <label> <%= @user.comments.where(state: 1).average(:score) %> </label></br></br>
 
   </div>
 </div>

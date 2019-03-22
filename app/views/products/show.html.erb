@@ -11,7 +11,7 @@
     <label>Quantity Available:</label>
     <label> <%= @product.stock%> </label></br>
     <label>Rating:</label>
-    <label> <%= @product.comments.where(state: 1).average(:score).round(2) %> </label>
+    <label> <%= @product.comments.where(state: 1).average(:score) %> </label>
     <h3>Price: $<%=@product.price%></h3>
     <% if current_user and current_user.has_role? :client %>
       <%= form_for(Detail.new) do |f| %>
