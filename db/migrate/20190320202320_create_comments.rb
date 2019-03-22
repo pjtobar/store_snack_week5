@@ -5,6 +5,7 @@ class CreateComments < ActiveRecord::Migration[5.2]
       t.belongs_to :commentable, polymorphic: true
       t.references :user, foreign_key: true
       t.integer :state
+      t.integer :score, default: 0
 
       t.timestamps
     end

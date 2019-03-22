@@ -13,7 +13,7 @@ class UsersController < ApplicationController
     @commentable = @user
     @comments = @commentable.comments.approve
     @comment = Comment.new
-    @feedback = Feedback.new
+    # @feedback = Feedback.new
   end
 
   def pending_approval

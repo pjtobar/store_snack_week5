@@ -1,7 +1,15 @@
 <%= form_for [@commentable, @comment] do |f| %>
   <div class="field">
     <%= f.text_area :review, rows: 5, class: "form-control" %>
+    <%= label_tag 'Give feedback' %> </br>
+    1 <%= f.radio_button :score, 1, :checked => false %>
+    2 <%= f.radio_button :score, 2, :checked => false %>
+    3 <%= f.radio_button :score, 3, :checked => false %>
+    4 <%= f.radio_button :score, 4, :checked => false %>
+    5 <%= f.radio_button :score, 5, :checked => false %>
   </div>
+
+
   <div class="actions">
     <%= f.submit %>
   </div>

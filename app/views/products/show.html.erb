@@ -9,9 +9,10 @@
     <label>Category:</label>
     <label> <%= @product.category_name%> </label></br>
     <label>Quantity Available:</label>
-    <label> <%= @product.stock%> </label>
-    <h3>Price:</h3>
-    <h3>$<%=@product.price%></h3>
+    <label> <%= @product.stock%> </label></br>
+    <label>Rating:</label>
+    <label> <%= @product.comments.where(state: 1).average(:score).round(2) %> </label>
+    <h3>Price: $<%=@product.price%></h3>
     <% if current_user and current_user.has_role? :client %>
       <%= form_for(Detail.new) do |f| %>
           <%= label_tag :quantity %>

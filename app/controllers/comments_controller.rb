@@ -30,10 +30,10 @@ class CommentsController < ApplicationController
   end
 
   def allowed_params_product
-    params.require(:comment).permit(:review).merge(user_id: current_user.id, state: 1)
+    params.require(:comment).permit(:review, :score).merge(user_id: current_user.id, state: 1)
   end
 
   def allowed_params_user
-    params.require(:comment).permit(:review).merge(user_id: current_user.id, state: 0)
+    params.require(:comment).permit(:review, :score).merge(user_id: current_user.id, state: 0)
   end
 end
