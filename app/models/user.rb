@@ -2,6 +2,7 @@ class User < ApplicationRecord
   rolify
   has_many :purchases
   has_many :likes
+  has_many :feedbacks
   has_many :products, through: :likes
   has_many :comments, as: :commentable
 

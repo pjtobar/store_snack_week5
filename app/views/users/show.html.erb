@@ -5,6 +5,21 @@
     <label> <%= @user.username %> </label></br>
     <label>Email:</label>
     <label> <%= @user.email %> </label></br>
+    <label>Average Feedback:</label>
+    <label> <%= @user.feedbacks.average(:score) %> </label></br></br>
+
+    <% if (current_user.id != @user.id) and (current_user.has_role? :client) %>
+      <%= form_for @feedback, url: feedbacks_create_path do |f| %>
+          <%= label_tag 'Give feedback' %> </br>
+          1 <%= f.radio_button :score, 1, :checked => false %>
+          2 <%= f.radio_button :score, 2, :checked => false %>
+          3 <%= f.radio_button :score, 3, :checked => false %>
+          4 <%= f.radio_button :score, 4, :checked => false %>
+          5 <%= f.radio_button :score, 5, :checked => false %> </br>
+          <%= f.hidden_field :user_id, value: @user.id %>
+          <%= f.submit "Send", class: "btn btn-success" %>
+      <% end %>
+    <% end %>
   </div>
 </div>
 
@@ -13,7 +28,7 @@
     <div class="panel-body">
       <h3>Comments</h3>
       <%= render "comments/comments" %>
-<% if current_user and current_user.has_role? :client %>
+<% if (current_user.id != @user.id) and (current_user.has_role? :client) %>
       <h3>Add Comment</h3>
       <%= render "comments/form" %>
     </div>

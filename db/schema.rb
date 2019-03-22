@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_20_202320) do
+ActiveRecord::Schema.define(version: 2019_03_22_045931) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -64,6 +64,14 @@ ActiveRecord::Schema.define(version: 2019_03_20_202320) do
     t.integer "quantity"
     t.index ["product_id"], name: "index_details_on_product_id"
     t.index ["purchase_id"], name: "index_details_on_purchase_id"
+  end
+
+  create_table "feedbacks", force: :cascade do |t|
+    t.bigint "user_id"
+    t.integer "score"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_feedbacks_on_user_id"
   end
 
   create_table "likes", force: :cascade do |t|
@@ -146,6 +154,7 @@ ActiveRecord::Schema.define(version: 2019_03_20_202320) do
   add_foreign_key "comments", "users"
   add_foreign_key "details", "products"
   add_foreign_key "details", "purchases"
+  add_foreign_key "feedbacks", "users"
   add_foreign_key "likes", "products"
   add_foreign_key "likes", "users"
   add_foreign_key "products", "categories"

@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  post 'feedbacks/create'
   root 'products#index'
   get 'comments/index'
   get 'comments/new'
