@@ -1,7 +1,7 @@
 module API
   module V1
     class UsersController < ApplicationController
-      SECRET_KEY = '0ef0a696-67a1-4987-83e4-4cbc3d0c20e8'
+      SECRET_KEY = '0ef0a696-67a1-4987-83e4-4cbc3d0c20e8' # this is wrong in so many levels
       skip_before_action :verify_authenticity_token
 
       def index
