@@ -10,6 +10,7 @@ class CommentsController < ApplicationController
   end
 
   def create
+
     if @commentable.class == Product
       @comment = @commentable.comments.new(allowed_params_product)
     else
@@ -31,6 +32,8 @@ class CommentsController < ApplicationController
 
   def allowed_params_product
     params.require(:comment).permit(:review, :score).merge(user_id: current_user.id, state: 1)
+    # never ever modify the params hash like this!
+    # https://rails-bestpractices.com/posts/2013/09/18/don-t-modify-the-params-hash/
   end
 
   def allowed_params_user

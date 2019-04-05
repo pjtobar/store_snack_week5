@@ -34,6 +34,7 @@
         <th scope="col">Stock</th>
         <% if user_signed_in? %>
           <th scope="col">Show</th>
+          <!-- Repetition much? I told you about this in week 5! -->
         <% if current_user and current_user.has_role? :client %>
           <th scope="col">Like</th>
           <th scope="col">Num Likes</th>
@@ -45,29 +46,29 @@
       </tr>
     </thead>
     <tbody>
-      <% @product.each_with_index do |pro, index|%>
+      <% @product.each_with_index do |product, index|%>
       <tr>
         <th scope="row"> <%= index+1%> </th>
-        <td> <%= pro.sku%> </td>
-        <td> <%= pro.name%> </td>
-        <td> <%= pro.category_name%> </td>
-        <td> <%= pro.price%> </td>
-        <td> <%= pro.stock%> </td>
+        <td> <%= product.sku%> </td>
+        <td> <%= product.name%> </td>
+        <td> <%= product.category_name%> </td>
+        <td> <%= product.price%> </td>
+        <td> <%= product.stock%> </td>
         <% if user_signed_in? %>
-          <td><%= link_to "Show Product", product_path(pro.id), class: "btn btn-success" %></td>
+          <td><%= link_to "Show Product", product_path(product.id), class: "btn btn-success" %></td>
           <% if current_user and current_user.has_role? :client %>
             <td>
               <%= form_with model: @like, method: "post" do |f| %>
-                <%= f.hidden_field :product_id, value: pro.id %>
+                <%= f.hidden_field :product_id, value: product.id %>
                 <%= f.submit "LIKE", class: "btn btn-info" %>
               <% end %>
             </td>
-            <td><%= pro.likes.size %></td>
+            <td><%= product.likes.size %></td>
           <% end %>
           <% if current_user and current_user.has_role? :admin %>
             <td>
-              <%= link_to 'edit', edit_product_path(pro.id), class: "btn btn-info" %>
-              <%= link_to 'Delete', product_path(pro), method: :delete, class: "btn btn-warning", data: {confirm: "Are you sure?"} %>
+              <%= link_to 'edit', edit_product_path(product.id), class: "btn btn-info" %>
+              <%= link_to 'Delete', product_path(product), method: :delete, class: "btn btn-warning", data: {confirm: "Are you sure?"} %>
             </td>
           <% end %>
         <%end%>

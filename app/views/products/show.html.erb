@@ -11,6 +11,7 @@
     <label>Quantity Available:</label>
     <label> <%= @product.stock%> </label></br>
     <label>Rating:</label>
+    <!-- Don't you have a scope for this? -->
     <label> <%= @product.comments.where(state: 1).average(:score) %> </label>
     <h3>Price: $<%=@product.price%></h3>
     <% if current_user and current_user.has_role? :client %>
